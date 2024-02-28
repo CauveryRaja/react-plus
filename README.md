@@ -4,6 +4,9 @@ A playground for all features implemented using React and Typescript. This proje
 ## Tech stacks used
 - [React](https://react.dev/) : User Interface Library
 - [React Testing Library](https://testing-library.com/) : User-centric UI testing library
+- [Prettier](https://prettier.io/) : Code formatter
+- [Husky](https://typicode.github.io/husky/#/) : Git Hooks for commit and push actions
+- [Lint staged](https://github.com/okonet/lint-staged) : Runs linters against git staged files
 
 ## Assumptions
 - Only use npm. Do not use yarn.
