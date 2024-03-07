@@ -1,12 +1,14 @@
-import Head from 'next/head'
-
+import Head from "next/head";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>React playground</title>
-        <meta name="description" content="React playground with implementation for various features" />
+        <title>React plus - A playground for all features</title>
+        <meta
+          name="description"
+          content="React playground with implementation for various features"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -14,5 +16,5 @@ export default function Home() {
         <div>hello world!</div>
       </main>
     </>
-  )
+  );
 }
