@@ -1,0 +1,14 @@
+{
+  "category": [
+    {
+      "id": "alpha",
+      "name": "Alpha",
+      "description": "Alpha version of data"
+    },
+    {
+      "id": "beta",
+      "name": "Beta",
+      "description": "Beta version of data"
+    }
+  ]
+}

@@ -18,10 +18,15 @@ const CategoryDataProvider = ({
 
   const categoryQuery = useQuery({
     queryKey: ["category"],
-    queryFn: () => fetch(`/category?id=${category}`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`http://localhost:5000/category?id=${category}`)
+        .then((res) => res.json())
+        .then((data) => data[0]),
     enabled: isCategorySupported,
   });
   const { data, status, error } = categoryQuery;
+
+  console.log("category data", data);
 
   if (!isCategorySupported)
     return <div>Category {category} is not supported!</div>;

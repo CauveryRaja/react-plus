@@ -9,10 +9,12 @@
     "lint": "next lint",
     "prepare": "husky install",
     "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "server": "json-server --watch mock-server/db.json --port 5000"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.27.5",
+    "json-server": "^1.0.0-alpha.23",
     "next": "14.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
