@@ -1,40 +1,49 @@
-import { PropsWithChildren, createContext } from "react";
+import { PropsWithChildren, createContext, useContext } from "react";
 import { SUPPORTED_CATEGORIES } from "../constants";
 import { useQuery } from "@tanstack/react-query";
 
 type CategoryProviderProps = {
-  category?: string;
+  categoryId?: string;
 };
 
-const CategoryDataContext = createContext({});
+type Category = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+type CategoryContext = {
+  category: Category;
+};
+const CategoryDataContext = createContext<CategoryContext>({
+  category: { id: "", name: "", description: "" },
+});
 
 const CategoryDataProvider = ({
-  category,
+  categoryId,
   children,
 }: PropsWithChildren<CategoryProviderProps>) => {
   const isCategorySupported = !!(
-    category && SUPPORTED_CATEGORIES.includes(category as CategoryId)
+    categoryId && SUPPORTED_CATEGORIES.includes(categoryId as CategoryId)
   );
 
   const categoryQuery = useQuery({
     queryKey: ["category"],
     queryFn: () =>
-      fetch(`http://localhost:5000/category?id=${category}`)
+      fetch(`http://localhost:5000/category?id=${categoryId}`)
         .then((res) => res.json())
         .then((data) => data[0]),
     enabled: isCategorySupported,
   });
   const { data, status, error } = categoryQuery;
 
-  console.log("category data", data);
-
   if (!isCategorySupported)
-    return <div>Category {category} is not supported!</div>;
+    return <div>Category {categoryId} is not supported!</div>;
 
   if (error) return <div>Cannot fetch category details</div>;
 
   return status === "success" ? (
-    <CategoryDataContext.Provider value={{}}>
+    <CategoryDataContext.Provider value={{ category: data }}>
       {children}
     </CategoryDataContext.Provider>
   ) : (
@@ -42,4 +51,6 @@ const CategoryDataProvider = ({
   );
 };
 
-export { CategoryDataContext, CategoryDataProvider };
+const useCategoryData = () => useContext<CategoryContext>(CategoryDataContext);
+
+export { CategoryDataProvider, useCategoryData };
